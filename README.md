@@ -43,4 +43,4 @@ The interpreter already has three variables set:
 
 The arithmetic operators are not as exact as possible. They add a little bit of randomness in order to discourage checking floating point equality, which is a very unstable operation.
 
-These operations allow the writing of all interesting programs, but we may add more operations in the future for the sake of convenience.
+These operations allow the writing of all interesting programs, but we may add more operations in the future for the sake of convenience. It should be noted that because of a lack of preset operators, there is no way to set new variables, and the name of all variables are therefore strings. This will probably be remedied in the future.
