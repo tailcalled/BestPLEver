@@ -2,9 +2,9 @@ package bestpl;
 
 import java.io.*;
 
-import bestpl.parser.Lexer;
-import bestpl.parser.Parser;
-import bestpl.parser.ParserException;
+import bestpl.interpreter.*;
+import bestpl.parser.Parser.SExpression;
+import bestpl.parser.*;
 
 public class BestPL {
 
@@ -21,7 +21,12 @@ public class BestPL {
 			print("   bestpl [file]");
 		}
 		File file = new File(args[0]);
-		print(new Parser(new Lexer(new FileReader(file))).parse());
+		Parser parser = new Parser(new Lexer(new FileReader(file)));
+		Interpreter interpreter = new DefaultInterpreter();
+		SExpression sexpr;
+		while ((sexpr = parser.parse()) != null) {
+			interpreter.interpret(sexpr);
+		}
 	}
 
 }

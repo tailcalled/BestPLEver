@@ -22,6 +22,7 @@ public class Lexer {
 	private final Reader input;
 	private Token curr;
 	private char currCh;
+	private boolean eof = false;
 	
 	public Lexer(Reader input) throws IOException {
 		this.input = input;
@@ -37,9 +38,10 @@ public class Lexer {
 		return curr;
 	}
 	private Token _readtok() throws IOException {
-		while (Character.isWhitespace(currCh)) {
-			if (!readch()) return EOF;
+		while (Character.isWhitespace(currCh) && !eof) {
+			readch();
 		}
+		if (eof) return EOF;
 		if (currCh == '(' || currCh == ')') {
 			char c = currCh;
 			readch();
@@ -57,6 +59,7 @@ public class Lexer {
 	public boolean readch() throws IOException {
 		int ch = input.read();
 		if (ch == -1) {
+			eof = true;
 			return false;
 		}
 		currCh = (char) ch;
